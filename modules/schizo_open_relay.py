@@ -8,6 +8,7 @@ except ImportError:
 import sys
 import errno
 import time
+import datetime
 import threading
 from time import gmtime, strftime
 import asyncore
@@ -57,9 +58,10 @@ def process_packet_for_shellcode(packet, ip, port):
         log_to_file(mailoney.logpath+"/shellcode.log", ip, port, packet)
         log_to_hpfeeds("shellcode",  json.dumps({ "Timestamp":format(time.time()), "ServerName": self.__fqdn, "SrcIP": self.__addr[0], "SrcPort": self.__addr[1],"Shellcode" :packet}))
 
+now = datetime.datetime.now()
+curtime = now.strftime('%a, %d %b %Y %H:%M:%S %z')
 
-
-__version__ = 'ESMTP Exim 4.81 #1 Thu, 29 Jul 2010 05:13:48 -0700'
+__version__ = 'ESMTP Exim 4.81 #1 ' + curtime
 EMPTYSTRING = ''
 NEWLINE = '\n'
 
